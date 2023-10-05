@@ -24,24 +24,35 @@ function onFormInput(e) {
   localStorage.setItem(FEEDBACK_KEY, JSON.stringify(inputForm));
 }
 
+// function populateForm() {
+//   let inputForm = localStorage.getItem(FEEDBACK_KEY);
+//   inputForm = JSON.parse(inputForm);
+// }
+
 function populateForm() {
   let inputForm = localStorage.getItem(FEEDBACK_KEY);
-  inputForm = JSON.parse(inputForm);
+  if (inputForm) {
+    inputForm = JSON.parse(inputForm);
+    Object.entries(inputForm).forEach(([name, value]) => {
+      formRef.elements[name].value = value;
+    });
+  }
 }
+
+// const FEEDBACK_KEY = 'feedback-form-state';
 
 // const refs = {
 //   form: document.querySelector('.feedback-form'),
-//   textarea: document.querySelector('feedback-form'),
+//   textarea: document.querySelector('.feedback-form'),
 // };
 
 // refs.form.addEventListener('submit', onFormSubmit);
-// refs.form.addEventListener('input', throttle(onTextareaInput, 500));
+// refs.textarea.addEventListener('input', throttle(onTextareaInput, 500));
 
 // populateTextarea();
 
 // function onFormSubmit(evt) {
 //   evt.preventDefault();
-
 //   evt.currentTatget.reset();
 //   localStorage.removeItem(FEEDBACK_KEY);
 // }
